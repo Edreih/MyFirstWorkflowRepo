@@ -3,6 +3,8 @@ on:
   push:
     branches: [ main ]
     paths: [ docker-action/** ]
+  workflow_dispatch:
+    
 
 jobs:
   test-action:
