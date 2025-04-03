@@ -16,28 +16,28 @@ on:
         required: true
 
 
-  jobs:
-    Build:
-      runs-on: ubuntu-latest
-      steps:
-        - run: |
-            echo " The Job was triggered by an event: ${{ github.event_name }}"
-            echo " The name of the branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo " The Job was triggered by an event: ${{ github.event_name }}"
+          echo " The name of the branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
-        - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-        - name: List files that exist in this repo
-          run: |
-            echo "The repository ${{ github.repository }} contains the following files: "
-            tree
+      - name: List files that exist in this repo
+        run: |
+          echo "The repository ${{ github.repository }} contains the following files: "
+          tree
 
-    Test:
-      runs-on: ubuntu-22.04
-      if: github.event_name == 'workflow_dispatch'
-      needs: Build
-      environment: Test
-      steps:
-        - run: |
-            echo "  Testing ..."
-            sleep 15
-          
+  Test:
+    runs-on: ubuntu-22.04
+    if: github.event_name == 'workflow_dispatch'
+    needs: Build
+    environment: Test
+    steps:
+      - run: |
+          echo "  Testing ..."
+          sleep 15
+        
